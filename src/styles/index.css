@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply bg-paper text-charcoal antialiased;
+  }
+  body {
+    @apply font-sans text-[15px] leading-6 text-charcoal;
+  }
+  h1, h2, h3 {
+    @apply font-sans font-semibold tracking-tight;
+  }
+  .amount {
+    @apply font-serif tabular-nums;
+  }
+  :focus-visible {
+    outline: 2px solid theme('colors.ink.700');
+    outline-offset: 2px;
+  }
+  ::selection {
+    background: theme('colors.gold.100');
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded px-4 py-2.5 text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-60;
+  }
+  .btn-primary {
+    @apply btn border border-ink-700 bg-ink-700 text-white hover:bg-ink-900;
+  }
+  .btn-secondary {
+    @apply btn border border-line bg-white text-ink-700 hover:bg-ink-50;
+  }
+  .btn-ghost {
+    @apply btn bg-transparent text-ink-700 hover:bg-ink-50;
+  }
+  .field-label {
+    @apply mb-1.5 block text-sm font-medium text-charcoal;
+  }
+  .field-input {
+    @apply w-full rounded border border-line bg-white px-3 py-2.5 text-[15px] text-charcoal placeholder:text-muted focus:border-ink-700 focus:outline-none focus:ring-1 focus:ring-ink-700;
+  }
+  .field-error {
+    @apply mt-1.5 text-sm text-danger-500;
+  }
+  .card {
+    @apply rounded border border-line bg-white;
+  }
+  .stat-value {
+    @apply amount text-3xl text-ink-700;
+  }
+  .badge {
+    @apply inline-flex items-center rounded px-2 py-0.5 text-xs font-medium;
+  }
+  .badge-draft { @apply badge bg-ink-50 text-ink-700; }
+  .badge-sent { @apply badge bg-gold-100 text-gold-600; }
+  .badge-overdue { @apply badge bg-danger-100 text-danger-600; }
+  .badge-paid { @apply badge bg-success-100 text-success-500; }
+  .badge-cancelled { @apply badge bg-ink-50 text-muted; }
+}
