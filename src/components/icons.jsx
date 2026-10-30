@@ -24,8 +24,9 @@ export const IconLogout = (p) => (
 )
 export const IconSettings = (p) => (
   <svg {...base} {...p}>
-    <circle cx="12" cy="12" r="3.5" />
-    <path d="M12 2.5v2.2M12 19.3v2.2M4.93 4.93l1.56 1.56M17.51 17.51l1.56 1.56M2.5 12h2.2M19.3 12h2.2M4.93 19.07l1.56-1.56M17.51 6.49l1.56-1.56" />
+    <circle cx="12" cy="12" r="2.8" />
+    <path d="M12 2.5v2.6M12 18.9v2.6M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M2.5 12h2.6M18.9 12h2.6M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8" />
+    <path d="M7.5 7.5l1.7 1.7M14.8 14.8l1.7 1.7M16.5 7.5l-1.7 1.7M9.2 14.8l-1.7 1.7" />
   </svg>
 )
 export const IconPlus = (p) => (
