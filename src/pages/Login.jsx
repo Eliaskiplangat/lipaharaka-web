@@ -53,7 +53,7 @@ export default function Login() {
         </div>
 
         <div className="flex justify-end">
-          <Link to="/register" className="text-sm text-emerald-100/80 hover:text-white">Forgot password?</Link>
+          <Link to="/reset-password" className="text-sm text-emerald-100/80 hover:text-white">Forgot password?</Link>
         </div>
 
         <button type="submit" disabled={loading} className="auth-button">

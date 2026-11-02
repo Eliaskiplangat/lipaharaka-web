@@ -5,6 +5,7 @@ import Layout from './components/Layout'
 
 import Login from './pages/Login'
 import Register from './pages/Register'
+import ResetPassword from './pages/ResetPassword'
 import PublicInvoicePay from './pages/PublicInvoicePay'
 import Dashboard from './pages/Dashboard'
 import Business from './pages/Business'
@@ -23,6 +24,7 @@ export default function App() {
       {/* Public, unauthenticated */}
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/pay/:token" element={<PublicInvoicePay />} />
 
       {/* SME-owner app */}

@@ -4,6 +4,12 @@ export const authApi = {
   requestOtp: (phoneNumber) =>
     apiClient.post('/api/v1/auth/otp/request', { phoneNumber }).then((r) => r.data),
 
+  requestPasswordResetOtp: (phoneNumber) =>
+    apiClient.post('/api/v1/auth/password-reset/request', { phoneNumber }).then((r) => r.data),
+
+  resetPassword: ({ phoneNumber, otpCode, newPassword }) =>
+    apiClient.post('/api/v1/auth/password-reset', { phoneNumber, otpCode, newPassword }).then((r) => r.data),
+
   register: ({ phoneNumber, fullName, password, otpCode }) =>
     apiClient.post('/api/v1/auth/register', { phoneNumber, fullName, password, otpCode }).then((r) => r.data),
 
