@@ -10,7 +10,7 @@ export default function AuthLayout({ title, subtitle, children }) {
       <div className="flex-1 flex items-center justify-center px-4 py-10">
         <div className="w-full max-w-sm">
           <div className="text-center mb-8">
-            <span className="font-serif text-3xl text-white tracking-tight">LipaHaraka</span>
+            <img src="/logo.svg" alt="LipaHaraka logo" className="mx-auto h-14 w-auto mb-4" />
             <p className="text-ink-100 text-sm mt-1">Invoicing and cash flow for Kenyan SMEs</p>
           </div>
           <div className="card p-6 md:p-8">
