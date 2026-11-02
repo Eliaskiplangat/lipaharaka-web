@@ -43,6 +43,15 @@
   .field-input {
     @apply w-full rounded border border-line bg-white px-3 py-2.5 text-[15px] text-charcoal placeholder:text-muted focus:border-ink-700 focus:outline-none focus:ring-1 focus:ring-ink-700;
   }
+  .auth-input {
+    @apply w-full border-0 border-b border-emerald-100/60 bg-transparent px-0 py-3 text-base text-white placeholder:text-emerald-50/60 focus:border-emerald-200 focus:outline-none;
+  }
+  .auth-button {
+    @apply mt-2 inline-flex w-full items-center justify-center rounded-xl border border-[#48c7b4] bg-[#45b9a6] px-4 py-4 text-lg font-semibold text-white shadow-[0_16px_26px_rgba(32,192,165,0.28)] transition hover:bg-[#3cae99] disabled:cursor-not-allowed disabled:opacity-60;
+  }
+  .auth-social {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-white/10 bg-white px-5 py-3 text-sm font-medium text-[#0b2e2d] shadow-sm transition hover:bg-emerald-50;
+  }
   .field-error {
     @apply mt-1.5 text-sm text-danger-500;
   }

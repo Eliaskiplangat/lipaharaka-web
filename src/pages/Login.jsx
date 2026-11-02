@@ -24,38 +24,61 @@ export default function Login() {
   }
 
   return (
-    <AuthLayout title="Log in" subtitle="Enter the phone number your business is registered with.">
-      <form onSubmit={handleSubmit} className="space-y-4">
+    <AuthLayout title="" subtitle="Enter your username and Password to sign in">
+      <form onSubmit={handleSubmit} className="space-y-5">
         <ErrorBanner error={error} />
+
         <div>
-          <label className="field-label" htmlFor="phoneNumber">Phone number</label>
           <input
             id="phoneNumber"
             type="tel"
             required
-            placeholder="+254712345678"
-            className="field-input"
+            placeholder="Email address / ID"
+            className="auth-input"
             value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
           />
         </div>
-        <div>
-          <label className="field-label" htmlFor="password">Password</label>
+
+        <div className="relative">
           <input
             id="password"
             type="password"
             required
-            className="field-input"
+            placeholder="Enter your Password"
+            className="auth-input pr-10"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button type="submit" disabled={loading} className="btn-primary w-full">
-          {loading ? 'Logging in…' : 'Log in'}
+
+        <div className="flex justify-end">
+          <Link to="/register" className="text-sm text-emerald-100/80 hover:text-white">Forgot password?</Link>
+        </div>
+
+        <button type="submit" disabled={loading} className="auth-button">
+          {loading ? 'Logging in…' : 'Login Now'}
         </button>
       </form>
-      <p className="text-sm text-muted text-center mt-6">
-        New to LipaHaraka? <Link to="/register" className="text-ink-700 font-medium hover:underline">Create an account</Link>
+
+      <div className="mt-8 text-center text-sm text-emerald-50/80">
+        Or Login with
+      </div>
+
+      <div className="mt-5 flex justify-center gap-4">
+        <button type="button" className="auth-social">
+          <span className="text-lg font-bold">G</span>
+          <span>Google</span>
+        </button>
+        <button type="button" className="auth-social">
+          <span className="text-lg font-bold"></span>
+          <span>Apple</span>
+        </button>
+      </div>
+
+      <p className="mt-8 text-center text-sm text-emerald-50/80">
+        Don&apos;t have an account?{' '}
+        <Link to="/register" className="font-medium text-white hover:text-emerald-100">Register Now</Link>
       </p>
     </AuthLayout>
   )
