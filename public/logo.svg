@@ -1,29 +1,21 @@
-<svg width="440" height="140" viewBox="0 0 440 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="980" height="240" viewBox="0 0 980 240" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="#0F766E"/>
-      <stop offset="1" stop-color="#0B5B4B"/>
-    </linearGradient>
-    <linearGradient id="shine" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="#F7FAF4" stop-opacity="1"/>
-      <stop offset="1" stop-color="#E5F7EE" stop-opacity="1"/>
+    <linearGradient id="goldGlow" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#F5E5A8"/>
+      <stop offset="1" stop-color="#C9953B"/>
     </linearGradient>
   </defs>
 
-  <rect width="440" height="140" rx="28" fill="transparent"/>
-
-  <g transform="translate(12 10)">
-    <rect x="0" y="0" width="120" height="120" rx="30" fill="url(#bg)"/>
-    <circle cx="60" cy="60" r="38" fill="#F7FAF4" fill-opacity="0.18"/>
-    <path d="M40 43.5C40 35.4919 46.4919 29 54.5 29H74.5C82.5081 29 89 35.4919 89 43.5V51.5C89 59.5081 82.5081 66 74.5 66H59.2C57.0848 66 55.4 67.6848 55.4 69.8V74.2C55.4 76.3152 57.0848 78 59.2 78H78.5C80.433 78 82 79.567 82 81.5C82 83.433 80.433 85 78.5 85H59.2C51.9117 85 46 79.0883 46 71.8V70.5C46 68.567 47.567 67 49.5 67H73.5C77.6421 67 81 63.6421 81 59.5V43.5C81 39.3579 77.6421 36 73.5 36H54.5C50.3579 36 47 39.3579 47 43.5V49.5H40V43.5Z" fill="url(#shine)"/>
-    <path d="M67 39H75.5C82.9558 39 89 45.0447 89 52.5C89 59.9553 82.9558 66 75.5 66H71.5" stroke="#F7FAF4" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M52 76L70 51.5" stroke="#F7FAF4" stroke-width="6" stroke-linecap="round"/>
-    <path d="M76 76H90" stroke="#F7FAF4" stroke-width="6" stroke-linecap="round"/>
+  <g transform="translate(0,8)">
+    <rect x="0" y="18" width="170" height="170" rx="42" fill="#EAFEF7"/>
+    <text x="30" y="120" fill="#0A554C" font-size="86" font-weight="700" font-family="Georgia, 'Times New Roman', serif" letter-spacing="-2">LP</text>
   </g>
 
-  <g transform="translate(150 34)">
-    <text x="0" y="36" fill="#0E1726" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="32" font-weight="700" letter-spacing="0.5">Lipa</text>
-    <text x="92" y="36" fill="#0F766E" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="32" font-weight="700" letter-spacing="0.5">Haraka</text>
-    <text x="2" y="70" fill="#4A5A67" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14" font-weight="600" letter-spacing="2.2">INVOICING • CASH FLOW • TRUST</text>
+  <g transform="translate(210,22)">
+    <text x="0" y="96" fill="#F3FFF9" font-size="78" font-weight="700" font-family="Georgia, 'Times New Roman', serif">Lipa</text>
+    <text x="188" y="96" fill="#A7EAD7" font-size="78" font-weight="700" font-style="italic" font-family="Georgia, 'Times New Roman', serif">Haraka</text>
+    <line x1="4" y1="118" x2="565" y2="118" stroke="#C7F2E5" stroke-width="2" opacity="0.8"/>
+    <text x="4" y="162" fill="#DFFAF2" font-size="20" font-weight="700" letter-spacing="4.2" font-family="Arial, Helvetica, sans-serif">INVOICING • CASH FLOW • TRUST</text>
   </g>
 </svg>
+
