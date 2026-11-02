@@ -4,36 +4,34 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Deep teal-ink: the brand's primary color. Money/growth-coded without being a
-        // literal M-Pesa-green clone.
+        // Stronger, friendlier green that reads as active and trustworthy.
         ink: {
-          50: '#EAF1F0',
-          100: '#CFE0DE',
-          300: '#6E9C97',
-          500: '#2C6B65',
-          700: '#0F3D3E',
-          900: '#0A2726',
+          50: '#ECF9F6',
+          100: '#D2F0EA',
+          300: '#77D4BF',
+          500: '#25A98B',
+          700: '#0F7A66',
+          900: '#0A554C',
         },
-        // Warm gold: the single accent color, used sparingly for calls-to-action and
-        // the one highlighted number on a screen.
+        // A warm supporting accent used sparingly, mostly for emphasis.
         gold: {
-          100: '#F3E3C2',
-          400: '#D9A441',
-          500: '#C68A2E',
-          600: '#A66F1F',
+          100: '#F7E8C8',
+          400: '#E1B25C',
+          500: '#C99234',
+          600: '#A96F1E',
         },
-        paper: '#F7F6F2',
-        line: '#DEDACF',
-        charcoal: '#191B1A',
-        muted: '#6B6960',
+        paper: '#F4F8F6',
+        line: '#D9E7E3',
+        charcoal: '#152722',
+        muted: '#60726D',
         danger: {
-          100: '#F3DCD3',
-          500: '#B5432B',
-          600: '#8F3220',
+          100: '#FDE7E3',
+          500: '#D95A3B',
+          600: '#AC422D',
         },
         success: {
-          100: '#DCEADB',
-          500: '#2F7D52',
+          100: '#E2F5E9',
+          500: '#2D8E59',
         },
       },
       fontFamily: {

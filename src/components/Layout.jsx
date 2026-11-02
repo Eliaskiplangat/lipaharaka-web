@@ -22,7 +22,7 @@ export default function Layout() {
 
   return (
     <div className="min-h-screen flex flex-col bg-paper md:flex-row">
-      <header className="md:hidden flex items-center justify-between border-b border-line bg-ink-700 px-4 py-3 text-white">
+      <header className="md:hidden flex items-center justify-between border-b border-line bg-ink-900 px-4 py-3 text-white shadow-sm">
         <button onClick={() => setDrawerOpen(true)} aria-label="Open menu" className="rounded p-1.5 text-white">
           <span className="mb-1 block h-0.5 w-5 bg-white" />
           <span className="mb-1 block h-0.5 w-5 bg-white" />
@@ -35,7 +35,7 @@ export default function Layout() {
       {drawerOpen && (
         <div className="fixed inset-0 z-40 bg-charcoal/50 md:hidden" onClick={() => setDrawerOpen(false)}>
           <nav
-            className="h-full w-72 bg-ink-700 p-4 text-white"
+            className="h-full w-72 bg-ink-900 p-4 text-white"
             onClick={(e) => e.stopPropagation()}
           >
             <SidebarContent navItems={navItems} user={user} logout={logout} onNavigate={() => setDrawerOpen(false)} />
@@ -43,7 +43,7 @@ export default function Layout() {
         </div>
       )}
 
-      <nav className="hidden w-64 shrink-0 bg-ink-700 p-5 text-white md:flex md:flex-col">
+      <nav className="hidden w-64 shrink-0 bg-ink-900 p-5 text-white md:flex md:flex-col">
         <SidebarContent navItems={navItems} user={user} logout={logout} />
       </nav>
 
@@ -59,15 +59,15 @@ export default function Layout() {
 function SidebarContent({ navItems, user, logout, onNavigate }) {
   return (
     <>
-      <div className="mb-6 rounded border border-white/10 bg-white/5 p-3">
+      <div className="mb-6 rounded-xl border border-white/10 bg-white/5 p-3 shadow-sm">
         <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-ink-100">Account</p>
-        <p className="mt-2 text-sm font-medium text-white">{user?.fullName || 'Business owner'}</p>
+        <p className="mt-2 text-sm font-semibold text-white">{user?.fullName || 'Business owner'}</p>
         <p className="mt-1 text-xs text-ink-100">
           {user?.role === 'ADMIN' ? 'Platform admin' : 'Business owner'}
         </p>
       </div>
 
-      <ul className="flex-1 space-y-1">
+      <ul className="flex-1 space-y-1.5">
         {navItems.map(({ to, label, icon: Icon, end }) => (
           <li key={to}>
             <NavLink
@@ -75,10 +75,10 @@ function SidebarContent({ navItems, user, logout, onNavigate }) {
               end={end}
               onClick={onNavigate}
               className={({ isActive }) =>
-                `flex items-center gap-3 rounded border-l-2 px-3 py-2.5 text-sm transition-colors ${
+                `flex items-center gap-3 rounded-xl border px-3 py-2.5 text-sm transition-all ${
                   isActive
-                    ? 'border-gold-400 bg-white/10 text-white font-medium'
-                    : 'border-transparent text-ink-100 hover:bg-white/5'
+                    ? 'border-ink-300 bg-ink-700 text-white shadow-sm'
+                    : 'border-transparent text-ink-100 hover:bg-white/5 hover:text-white'
                 }`
               }
             >
@@ -93,7 +93,7 @@ function SidebarContent({ navItems, user, logout, onNavigate }) {
         <NavLink
           to="/settings"
           onClick={onNavigate}
-          className={({ isActive }) => `flex items-center gap-3 rounded px-3 py-2.5 text-sm transition-colors ${isActive ? 'bg-white/10 text-white font-medium' : 'text-ink-100 hover:bg-white/5'}`}
+          className={({ isActive }) => `flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition-colors ${isActive ? 'bg-white/10 text-white font-medium' : 'text-ink-100 hover:bg-white/5 hover:text-white'}`}
         >
           <IconSettings />
           Settings
@@ -101,7 +101,7 @@ function SidebarContent({ navItems, user, logout, onNavigate }) {
 
         <button
           onClick={logout}
-          className="flex w-full items-center gap-3 rounded px-3 py-2.5 text-sm text-ink-100 hover:bg-white/5"
+          className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-ink-100 transition-colors hover:bg-white/5 hover:text-white"
         >
           <IconLogout />
           Log out

@@ -61,21 +61,6 @@ export default function Login() {
         </button>
       </form>
 
-      <div className="mt-8 text-center text-sm text-emerald-50/80">
-        Or Login with
-      </div>
-
-      <div className="mt-5 flex justify-center gap-4">
-        <button type="button" className="auth-social">
-          <span className="text-lg font-bold">G</span>
-          <span>Google</span>
-        </button>
-        <button type="button" className="auth-social">
-          <span className="text-lg font-bold"></span>
-          <span>Apple</span>
-        </button>
-      </div>
-
       <p className="mt-8 text-center text-sm text-emerald-50/80">
         Don&apos;t have an account?{' '}
         <Link to="/register" className="font-medium text-white hover:text-emerald-100">Register Now</Link>
