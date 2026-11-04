@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { invoiceApi } from '../../api/invoices'
 import { advanceApi } from '../../api/advances'
+import { paymentApi } from '../../api/payments'
 import Money from '../../components/Money'
 import StatusBadge from '../../components/StatusBadge'
 import Spinner from '../../components/Spinner'
@@ -14,18 +15,24 @@ export default function InvoiceDetail() {
   const [invoice, setInvoice] = useState(undefined)
   const [error, setError] = useState(null)
   const [sending, setSending] = useState(false)
-  const [copied, setCopied] = useState(false)
+  const [sendingPrompt, setSendingPrompt] = useState(false)
+  const [updatingPhone, setUpdatingPhone] = useState(false)
+  const [promptSent, setPromptSent] = useState(false)
+  const [buyerPhoneDraft, setBuyerPhoneDraft] = useState(invoice?.buyerPhoneNumber || '')
 
   function reload() {
     invoiceApi.get(id).then(setInvoice).catch(setError)
   }
+
+  useEffect(() => {
+    setBuyerPhoneDraft(invoice?.buyerPhoneNumber || '')
+  }, [invoice?.buyerPhoneNumber])
 
   useEffect(reload, [id])
 
   if (error) return <ErrorBanner error={error} />
   if (invoice === undefined) return <Spinner label="Loading invoice" />
 
-  const payLink = `${window.location.origin}/pay/${invoice.shareableToken}`
   const isEligibleForAdvance = invoice.status === 'SENT' || invoice.status === 'OVERDUE'
 
   async function handleSend() {
@@ -41,10 +48,44 @@ export default function InvoiceDetail() {
     }
   }
 
-  function handleCopyLink() {
-    navigator.clipboard.writeText(payLink)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
+  async function handleUpdateBuyerPhone() {
+    const phone = buyerPhoneDraft.trim()
+    if (!phone) {
+      setError(new Error('Buyer phone number is required before sending a payment prompt.'))
+      return
+    }
+
+    setUpdatingPhone(true)
+    setError(null)
+    try {
+      const updated = await invoiceApi.updateBuyerPhone(invoice.id, phone)
+      setInvoice(updated)
+      setPromptSent(false)
+    } catch (err) {
+      setError(err)
+    } finally {
+      setUpdatingPhone(false)
+    }
+  }
+
+  async function handleSendPrompt() {
+    const phone = (invoice.buyerPhoneNumber || buyerPhoneDraft).trim()
+    if (!phone) {
+      setError(new Error('This buyer does not have a phone number saved yet.'))
+      return
+    }
+
+    setSendingPrompt(true)
+    setError(null)
+    try {
+      await paymentApi.initiate(invoice.shareableToken, phone)
+      setPromptSent(true)
+      setInvoice((current) => current ? { ...current, buyerPhoneNumber: phone } : current)
+    } catch (err) {
+      setError(err)
+    } finally {
+      setSendingPrompt(false)
+    }
   }
 
   return (
@@ -75,13 +116,28 @@ export default function InvoiceDetail() {
       )}
 
       {invoice.status !== 'DRAFT' && invoice.status !== 'CANCELLED' && (
-        <div className="border border-line rounded px-4 py-3 text-sm">
-          <p className="font-medium mb-1.5">Payment link</p>
-          <div className="flex items-center gap-2">
-            <input readOnly className="field-input text-xs" value={payLink} />
-            <button onClick={handleCopyLink} className="btn-secondary shrink-0 text-xs px-3">
-              {copied ? 'Copied' : 'Copy'}
+        <div className="border border-line rounded px-4 py-3 text-sm space-y-3">
+          <div className="flex items-center justify-between gap-2">
+            <p className="font-medium">Payment</p>
+            <button onClick={handleSendPrompt} disabled={sendingPrompt || promptSent} className="btn-primary text-xs px-3 py-2">
+              {sendingPrompt ? 'Sending…' : promptSent ? 'Prompt sent' : 'Send prompt'}
             </button>
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <label className="text-muted text-[11px] uppercase tracking-wide">Buyer phone</label>
+            <div className="flex items-center gap-2">
+              <input
+                type="tel"
+                value={buyerPhoneDraft}
+                onChange={(e) => setBuyerPhoneDraft(e.target.value)}
+                className="field-input text-xs flex-1"
+                placeholder="+254712345678"
+              />
+              <button onClick={handleUpdateBuyerPhone} disabled={updatingPhone} className="btn-secondary shrink-0 text-xs px-3">
+                {updatingPhone ? 'Saving…' : 'Save'}
+              </button>
+            </div>
           </div>
         </div>
       )}

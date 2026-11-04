@@ -10,6 +10,9 @@ export const invoiceApi = {
 
   get: (id) => apiClient.get(`/api/v1/invoices/${id}`).then((r) => r.data),
 
+  updateBuyerPhone: (id, phoneNumber) =>
+    apiClient.put(`/api/v1/invoices/${id}/buyer-phone`, { phoneNumber }).then((r) => r.data),
+
   // Public, unauthenticated — used by the buyer-facing pay page.
   getPublic: (token) => apiClient.get(`/api/v1/invoices/public/${token}`).then((r) => r.data),
 }
