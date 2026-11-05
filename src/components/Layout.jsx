@@ -22,21 +22,17 @@ export default function Layout() {
 
   return (
     <div className="min-h-screen flex flex-col bg-paper md:flex-row">
-      <header className="md:hidden flex items-center justify-between border-b border-line bg-ink-900 px-4 py-3 text-white shadow-sm">
-        <button onClick={() => setDrawerOpen(true)} aria-label="Open menu" className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/5 text-white shadow-sm ring-1 ring-white/10 transition hover:bg-white/10">
-          <span className="flex flex-col gap-1.5">
-            <span className="block h-0.5 w-5 rounded-full bg-white" />
-            <span className="block h-0.5 w-5 rounded-full bg-white" />
-            <span className="block h-0.5 w-5 rounded-full bg-white" />
-          </span>
-        </button>
+      <header className="flex items-center justify-center bg-[#0d1b1d] px-4 py-3 text-white">
+        <div className="flex items-center gap-2.5 rounded-xl border border-white/10 bg-[#1d2125] px-2.5 py-1.5 shadow-[0_8px_20px_rgba(0,0,0,0.25)]">
+          <div className="flex h-8 w-8 items-center justify-center rounded-md border border-[#8ef7e4]/70 bg-[radial-gradient(circle_at_30%_20%,rgba(174,255,240,0.55),rgba(58,182,172,0.8)_28%,rgba(0,75,72,0.96)_62%,rgba(0,35,34,1)_100%)] text-[0.7rem] font-black tracking-[-0.12em] text-white/95">
+            LP
+          </div>
 
-        <div className="inline-flex items-center gap-3 rounded-full bg-[#3d4046] px-4 py-2.5 shadow-sm ring-1 ring-white/10">
-          <img src="/logo.svg" alt="LipaHaraka" className="h-8 w-auto max-w-[150px] object-contain" />
-          <span className="text-2xl leading-none text-white/80">+</span>
+          <div className="flex items-center gap-2">
+            <span className="text-[0.95rem] font-medium tracking-[-0.04em] text-white/90">LipaHarak</span>
+            <span className="text-xl leading-none text-white/70">×</span>
+          </div>
         </div>
-
-        <span className="w-10" />
       </header>
 
       {drawerOpen && (
