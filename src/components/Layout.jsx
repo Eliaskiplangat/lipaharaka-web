@@ -23,18 +23,20 @@ export default function Layout() {
   return (
     <div className="min-h-screen flex flex-col bg-paper md:flex-row">
       <header className="md:hidden flex items-center justify-between border-b border-line bg-ink-900 px-4 py-3 text-white shadow-sm">
-        <button onClick={() => setDrawerOpen(true)} aria-label="Open menu" className="rounded p-1.5 text-white">
-          <span className="mb-1 block h-0.5 w-5 bg-white" />
-          <span className="mb-1 block h-0.5 w-5 bg-white" />
-          <span className="block h-0.5 w-5 bg-white" />
+        <button onClick={() => setDrawerOpen(true)} aria-label="Open menu" className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/5 text-white shadow-sm ring-1 ring-white/10 transition hover:bg-white/10">
+          <span className="flex flex-col gap-1.5">
+            <span className="block h-0.5 w-5 rounded-full bg-white" />
+            <span className="block h-0.5 w-5 rounded-full bg-white" />
+            <span className="block h-0.5 w-5 rounded-full bg-white" />
+          </span>
         </button>
 
-        <div className="inline-flex items-center gap-2 rounded-full bg-[#3d4046] px-3 py-1.5 shadow-sm ring-1 ring-white/10">
-          <img src="/logo.svg" alt="LipaHaraka" className="h-7 w-auto max-w-[150px] object-contain" />
-          <span className="text-xl leading-none text-white/80">+</span>
+        <div className="inline-flex items-center gap-3 rounded-full bg-[#3d4046] px-4 py-2.5 shadow-sm ring-1 ring-white/10">
+          <img src="/logo.svg" alt="LipaHaraka" className="h-8 w-auto max-w-[150px] object-contain" />
+          <span className="text-2xl leading-none text-white/80">+</span>
         </div>
 
-        <span className="w-7" />
+        <span className="w-10" />
       </header>
 
       {drawerOpen && (
