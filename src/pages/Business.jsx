@@ -144,19 +144,50 @@ function BusinessProfile({ business, onDocumentUploaded }) {
 
 function KycDocumentUploadForm({ onUploaded }) {
   const [documentType, setDocumentType] = useState(DOCUMENT_TYPES[0].value)
-  const [fileUrl, setFileUrl] = useState('')
+  const [selectedFileUrl, setSelectedFileUrl] = useState('')
+  const [manualFileUrl, setManualFileUrl] = useState('')
+  const [selectedFileName, setSelectedFileName] = useState('')
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState(null)
   const [success, setSuccess] = useState(false)
 
+  function handleFileChange(e) {
+    const file = e.target.files?.[0]
+    if (!file) {
+      setSelectedFileUrl('')
+      setSelectedFileName('')
+      return
+    }
+
+    const reader = new FileReader()
+    reader.onload = () => {
+      setSelectedFileUrl(String(reader.result))
+      setSelectedFileName(file.name)
+      setManualFileUrl('')
+    }
+    reader.onerror = () => {
+      setError(new Error('Unable to read the selected file. Please try another image or PDF.'))
+    }
+    reader.readAsDataURL(file)
+  }
+
   async function handleSubmit(e) {
     e.preventDefault()
+    const fileUrl = selectedFileUrl || manualFileUrl
     setError(null)
+
+    if (!fileUrl) {
+      setError(new Error('Please choose a document file/photo or paste a hosted document URL.'))
+      return
+    }
+
     setSubmitting(true)
     try {
       const updated = await businessApi.uploadKycDocument({ documentType, fileUrl })
       onUploaded(updated)
-      setFileUrl('')
+      setSelectedFileUrl('')
+      setManualFileUrl('')
+      setSelectedFileName('')
       setSuccess(true)
     } catch (err) {
       setError(err)
@@ -169,8 +200,8 @@ function KycDocumentUploadForm({ onUploaded }) {
     <div className="card p-6">
       <h2 className="text-base font-semibold mb-1">Upload a document</h2>
       <p className="text-muted text-sm mb-4">
-        Paste a link to a hosted copy of the document. (In production this would be a direct
-        file upload backed by object storage.)
+        Upload a file from your device, take a photo directly from your camera, or paste a hosted
+        document URL if you already have one.
       </p>
       <form onSubmit={handleSubmit} className="space-y-4">
         <ErrorBanner error={error} />
@@ -186,8 +217,32 @@ function KycDocumentUploadForm({ onUploaded }) {
           </select>
         </div>
         <div>
-          <label className="field-label" htmlFor="fileUrl">Document URL</label>
-          <input id="fileUrl" type="url" required placeholder="https://…" className="field-input" value={fileUrl} onChange={(e) => setFileUrl(e.target.value)} />
+          <label className="field-label" htmlFor="documentFile">Document file or photo</label>
+          <input
+            id="documentFile"
+            type="file"
+            accept="image/*,.pdf"
+            capture="environment"
+            className="field-input"
+            onChange={handleFileChange}
+          />
+          {selectedFileName && (
+            <p className="mt-2 text-xs text-muted">Selected file: {selectedFileName}</p>
+          )}
+        </div>
+        <div>
+          <label className="field-label" htmlFor="fileUrl">Or paste a hosted document URL</label>
+          <input
+            id="fileUrl"
+            type="url"
+            placeholder="https://…"
+            className="field-input"
+            value={manualFileUrl}
+            onChange={(e) => {
+              setManualFileUrl(e.target.value)
+              if (e.target.value.trim()) setSelectedFileUrl('')
+            }}
+          />
         </div>
         <button type="submit" disabled={submitting} className="btn-secondary">
           {submitting ? 'Uploading…' : 'Upload document'}
