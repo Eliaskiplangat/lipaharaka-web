@@ -22,19 +22,6 @@ export default function Layout() {
 
   return (
     <div className="min-h-screen flex flex-col bg-paper md:flex-row">
-      <header className="flex items-center justify-center bg-[#0d1b1d] px-4 py-3 text-white">
-        <div className="flex items-center gap-2.5 rounded-xl border border-white/10 bg-[#1d2125] px-2.5 py-1.5 shadow-[0_8px_20px_rgba(0,0,0,0.25)]">
-          <div className="flex h-8 w-8 items-center justify-center rounded-md border border-[#8ef7e4]/70 bg-[radial-gradient(circle_at_30%_20%,rgba(174,255,240,0.55),rgba(58,182,172,0.8)_28%,rgba(0,75,72,0.96)_62%,rgba(0,35,34,1)_100%)] text-[0.7rem] font-black tracking-[-0.12em] text-white/95">
-            LP
-          </div>
-
-          <div className="flex items-center gap-2">
-            <span className="text-[0.95rem] font-medium tracking-[-0.04em] text-white/90">LipaHarak</span>
-            <span className="text-xl leading-none text-white/70">×</span>
-          </div>
-        </div>
-      </header>
-
       {drawerOpen && (
         <div className="fixed inset-0 z-40 bg-charcoal/50 md:hidden" onClick={() => setDrawerOpen(false)}>
           <nav
