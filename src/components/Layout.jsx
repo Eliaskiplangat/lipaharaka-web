@@ -28,7 +28,12 @@ export default function Layout() {
           <span className="mb-1 block h-0.5 w-5 bg-white" />
           <span className="block h-0.5 w-5 bg-white" />
         </button>
-        <span className="font-serif text-lg tracking-tight">LipaHaraka</span>
+
+        <div className="inline-flex items-center gap-2 rounded-full bg-[#3d4046] px-3 py-1.5 shadow-sm ring-1 ring-white/10">
+          <img src="/logo.svg" alt="LipaHaraka" className="h-7 w-7 rounded-full object-cover" />
+          <span className="font-serif text-lg tracking-tight text-white">LipaHaraka</span>
+        </div>
+
         <span className="w-7" />
       </header>
 
