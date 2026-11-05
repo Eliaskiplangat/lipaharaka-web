@@ -8,6 +8,17 @@ import ErrorBanner from '../components/ErrorBanner'
 
 const STEPS = { LOADING: 'loading', READY: 'ready', PROMPT_SENT: 'prompt_sent', PAID: 'paid', NOT_FOUND: 'not_found' }
 
+function normalizeKenyanPhoneNumber(rawValue) {
+  const value = String(rawValue || '').trim().replace(/\s+/g, '').replace(/[()\-]/g, '')
+  if (!value) return ''
+
+  const digits = value.replace(/^\+/, '')
+  if (digits.startsWith('0')) return `254${digits.slice(1)}`
+  if (digits.startsWith('254')) return digits
+  if (digits.startsWith('7')) return `254${digits}`
+  return ''
+}
+
 /**
  * Buyer-facing, unauthenticated page reached via the invoice's shareable link
  * (see InvoiceDetail's "Payment link" — /pay/:token). No login, no sidebar: a buyer who has
@@ -55,9 +66,17 @@ export default function PublicInvoicePay() {
   async function handlePay(e) {
     e.preventDefault()
     setError(null)
+
+    const normalizedPhone = normalizeKenyanPhoneNumber(phoneNumber)
+    if (!normalizedPhone) {
+      setError(new Error('Enter a valid Kenyan mobile number to receive the M-Pesa prompt.'))
+      return
+    }
+
     setSubmitting(true)
     try {
-      await paymentApi.initiate(token, phoneNumber)
+      setPhoneNumber(normalizedPhone)
+      await paymentApi.initiate(token, normalizedPhone)
       setStep(STEPS.PROMPT_SENT)
     } catch (err) {
       setError(err)

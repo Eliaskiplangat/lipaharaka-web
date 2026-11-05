@@ -9,6 +9,17 @@ import Spinner from '../../components/Spinner'
 import ErrorBanner from '../../components/ErrorBanner'
 import { IconArrowLeft } from '../../components/icons'
 
+function normalizeKenyanPhoneNumber(rawValue) {
+  const value = String(rawValue || '').trim().replace(/\s+/g, '').replace(/[()\-]/g, '')
+  if (!value) return ''
+
+  const digits = value.replace(/^\+/, '')
+  if (digits.startsWith('0')) return `254${digits.slice(1)}`
+  if (digits.startsWith('254')) return digits
+  if (digits.startsWith('7')) return `254${digits}`
+  return ''
+}
+
 export default function InvoiceDetail() {
   const { id } = useParams()
   const navigate = useNavigate()
@@ -49,9 +60,10 @@ export default function InvoiceDetail() {
   }
 
   async function handleUpdateBuyerPhone() {
-    const phone = buyerPhoneDraft.trim()
+    const rawPhone = buyerPhoneDraft.trim()
+    const phone = normalizeKenyanPhoneNumber(rawPhone)
     if (!phone) {
-      setError(new Error('Buyer phone number is required before sending a payment prompt.'))
+      setError(new Error('Enter a valid Kenyan mobile number before saving the buyer phone.'))
       return
     }
 
@@ -60,6 +72,7 @@ export default function InvoiceDetail() {
     try {
       const updated = await invoiceApi.updateBuyerPhone(invoice.id, phone)
       setInvoice(updated)
+      setBuyerPhoneDraft(phone)
       setPromptSent(false)
     } catch (err) {
       setError(err)
@@ -69,9 +82,10 @@ export default function InvoiceDetail() {
   }
 
   async function handleSendPrompt() {
-    const phone = (invoice.buyerPhoneNumber || buyerPhoneDraft).trim()
+    const rawPhone = (invoice.buyerPhoneNumber || buyerPhoneDraft).trim()
+    const phone = normalizeKenyanPhoneNumber(rawPhone)
     if (!phone) {
-      setError(new Error('This buyer does not have a phone number saved yet.'))
+      setError(new Error('This buyer does not have a valid phone number saved yet.'))
       return
     }
 
@@ -80,6 +94,7 @@ export default function InvoiceDetail() {
     try {
       await paymentApi.initiate(invoice.shareableToken, phone)
       setPromptSent(true)
+      setBuyerPhoneDraft(phone)
       setInvoice((current) => current ? { ...current, buyerPhoneNumber: phone } : current)
     } catch (err) {
       setError(err)
