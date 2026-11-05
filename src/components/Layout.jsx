@@ -30,8 +30,11 @@ export default function Layout() {
         </button>
 
         <div className="inline-flex items-center gap-2 rounded-full bg-[#3d4046] px-3 py-1.5 shadow-sm ring-1 ring-white/10">
-          <img src="/logo.svg" alt="LipaHaraka" className="h-7 w-7 rounded-full object-cover" />
-          <span className="font-serif text-lg tracking-tight text-white">LipaHaraka</span>
+          <div className="flex h-7 w-7 items-center justify-center rounded-full bg-[#EAFEF7] text-[10px] font-bold tracking-[-0.08em] text-[#0A554C]">
+            LP
+          </div>
+          <span className="text-base font-semibold tracking-tight text-white">LipaHaraka</span>
+          <span className="text-xl leading-none text-white/80">+</span>
         </div>
 
         <span className="w-7" />
